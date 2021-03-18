@@ -7,31 +7,72 @@
         <div class="row">
           <div class="form-group col-md-6">
             <label for="exampleInputEmail1">First Name</label>
-            <input type="text" class="form-control" formControlName="firstName" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="First Name">
+            <input type="text" class="form-control" formControlName="firstName" id="exampleInputEmail1"
+              aria-describedby="emailHelp" placeholder="First Name">
           </div>
           <div class="form-group col-md-6">
             <label for="exampleInputPassword1">Last Name</label>
-            <input type="text" class="form-control" formControlName="lastName" id="exampleInputPassword1" placeholder="Last Name">
+            <input type="text" class="form-control" formControlName="lastName" id="exampleInputPassword1"
+              placeholder="Last Name">
           </div>
         </div>
         <div class="row">
           <div class="form-group col-md-12">
             <label for="exampleInputEmail1">Email</label>
-            <input type="text" class="form-control" formControlName="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+            <input type="text" class="form-control" formControlName="email" id="exampleInputEmail1"
+              aria-describedby="emailHelp" placeholder="Email">
           </div>
         </div>
-        <button type="submit" [disabled]="!userForm.valid" class="btn btn-danger">Create</button>
+        <div class="mrgnbtm">
+          <app-users *ngIf="users.length !== 0" [users]="users"></app-users>
+        </div>
+        <div class="mrgnbtm">
+          <select (click)="onSelectedFelgen($event)">
+            <option *ngFor="let felgenItem of felgen;let i = index" [ngClass]="{'selected': i===selectedIndex}">
+              {{felgenItem.definition}}
+            </option>
+          </select>
+        </div>
+        <div class="mrgnbtm">
+          <select (click)="onSelectedLackierung($event)">
+            <option *ngFor="let lackierungItem of lackierung;let i = index" [ngClass]="{'selected': i===selectedIndex}">
+              {{lackierungItem.definition}}
+            </option>
+          </select>
+
+        </div>
+        <div class="mrgnbtm">
+          <select (click)="onSelectedMotorleistung($event)">
+            <option *ngFor="let motorleistungItem of motorleistung;let i = index"
+              [ngClass]="{'selected': i===selectedIndex}">
+              {{motorleistungItem.definition}}
+            </option>
+          </select>
+        </div>
+
+        <div *ngIf="sonderausstattungen.length !== 0">
+          <li class="form-control" formArrayName="sonderAusstattungFormArray" 
+            *ngFor="let sonderausstattungItem of sonderausstattungen; let i = index">
+            <input type="checkbox" [value]="i" (change)=onCheckChange($event)>
+            {{sonderausstattungItem.definition}}
+          </li>
+        </div>
+        <div>
+          <textarea disabled>{{bestellungText}} </textarea>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="Preis">Preis</label>
+          <input type="text" class="form-control" formControlName="preis" id="preisText" aria-describedby="emailHelp"
+            disabled>{{preisText}}
+        </div>
+
+        <button type="submit" [disabled]="!userForm.valid" class="btn btn-success">Create</button>
+        <button type="button" [disabled]="!userForm.valid" class="btn btn-danger" (click)="deleteUser()">Delete</button>
       </form>
     </div>
     <div class="col-md-4 mrgnbtm">
-      <app-display-board
-       [userCount]="userCount"
-       (getUsersEvent)="getAllUsers()"
-      >
+      <app-display-board [userCount]="userCount" (getUsersEvent)="getAllUsers()">
       </app-display-board>
     </div>
   </div>
-</div>
-<div class="mrgnbtm">
-  <app-users *ngIf="users.length !== 0" [users]="users"></app-users>
 </div>

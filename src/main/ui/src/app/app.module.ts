@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,10 @@ import { HeaderComponent } from './header/header.component';
 import { DisplayBoardComponent } from './display-board.component';
 import { UsersComponent } from './users.component';
 import { environment } from '../environments/environment';
+import { FelgenComponent } from './felgen/felgen.component';
+import { LackierungComponent } from './lackierung/lackierung.component';
+import { MotorleistungComponent } from './motorleistung/motorleistung.component';
+import { SonderausstattungComponent } from './sonderausstattung/sonderausstattung.component';
 
 // state related imports
 // import { StoreModule } from '@ngrx/store';
@@ -23,7 +27,11 @@ import { environment } from '../environments/environment';
     AppComponent,
     HeaderComponent,
     DisplayBoardComponent,
-    UsersComponent
+    UsersComponent,
+    FelgenComponent,
+    LackierungComponent,
+    MotorleistungComponent,
+    SonderausstattungComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +73,7 @@ import { environment } from '../environments/environment';
      * See: https://github.com/ngrx/platform/blob/master/docs/effects/api.md#forroot
      */
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],
   bootstrap: [AppComponent]
 })

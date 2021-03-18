@@ -26,6 +26,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
  */
 
 import * as fromCreateUser from './createuser';
+import * as fromCreateBestellung from './createbestellung';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -33,6 +34,7 @@ import * as fromCreateUser from './createuser';
  */
 export interface State {
     createUser: fromCreateUser.State;
+    createBestellung: fromCreateBestellung.State;
     routerReducer: fromRouter.RouterReducerState<RouterStateUrl>;
 }
 
@@ -43,6 +45,7 @@ export interface State {
  */
 export const reducers: ActionReducerMap<State> = {
     createUser: fromCreateUser.reducer,
+    createBestellung: fromCreateBestellung.reducer,
     routerReducer: fromRouter.routerReducer,
 };
 
@@ -81,4 +84,11 @@ export const getCreateUserState = createFeatureSelector<fromCreateUser.State>('c
 export const getUsers = createSelector(
   getCreateUserState,
   fromCreateUser.getUsers
+);
+
+export const getCreateBestellungState = createFeatureSelector<fromCreateBestellung.State>('createBestellung');
+
+export const getBestellung = createSelector(
+  getCreateBestellungState,
+  fromCreateBestellung.getBestellungen
 );
